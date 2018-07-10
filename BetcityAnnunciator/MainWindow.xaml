@@ -41,7 +41,7 @@
         </Grid>
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1">
             <wpf:ChromiumWebBrowser x:Name="Browser"
-                                    Address="https://betcity.ru/ru/liveresults">
+                                    Address="https://betcity.ru/ru/liveresults"  FrameLoadEnd="Browser_OnFrameLoadEnd">
                 <i:Interaction.Behaviors>
                     <behaviours:HoverLinkBehaviour x:Name="HoverLinkBehaviour"/>
                 </i:Interaction.Behaviors>
