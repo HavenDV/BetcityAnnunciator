@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Collections.Generic;
 using CefSharp;
 using HtmlAgilityPack;
 
@@ -12,7 +10,7 @@ namespace BetcityAnnunciator
     {
         #region Properties
         
-        private string Data { get; set; }
+        private List<BetcityEvent> Events { get; set; }
 
         #endregion
 
@@ -23,27 +21,34 @@ namespace BetcityAnnunciator
 
         private async void Browser_OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
-            if (e.Frame.IsMain)
+            if (!e.Frame.IsMain)
             {
-                await Task.Delay(5000);
-
-                //Browser.ViewSource();
-                var html = await Browser.GetSourceAsync();
-
-                var document = new HtmlDocument();
-                document.LoadHtml(html);
-
-                var champs = document.DocumentNode
-                    .SelectNodes("//div[@class=\"live-results-championship ng-scope\"]");
-
-                var names = champs
-                    .SelectMany(i => i.SelectNodes("//div[@class=\"live-results-championship-header__name\"]"))
-                    .Select(i => i.InnerHtml);
-
-                var text = string.Join(Environment.NewLine, names);
-                File.WriteAllText("D:/test.txt", text);
-                MessageBox.Show(text);
+                return;
             }
+
+            await Task.Delay(5000);
+
+            var html = await Browser.GetSourceAsync();
+
+            Events = GetEvents(html);
         }
+
+        private static List<BetcityEvent> GetEvents(string html)
+        {
+            var document = new HtmlDocument();
+            document.LoadHtml(html);
+
+            return GetEvents(document.DocumentNode);
+        }
+
+        private static List<BetcityEvent> GetEvents(HtmlNode node) => node
+            .SelectNodes("//tooltip[@championship and @score and @title]")
+            .Select(i => new BetcityEvent
+            {
+                Championship = i.Attributes["championship"].Value,
+                Score = i.Attributes["score"].DeEntitizeValue,
+                Title = i.Attributes["title"].Value
+            })
+            .ToList();
     }
 }

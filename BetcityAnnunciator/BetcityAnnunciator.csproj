@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="Behaviours\HoverLinkBehaviour.cs" />
     <Compile Include="Behaviours\TextBoxBindingUpdateOnEnterBehaviour.cs" />
+    <Compile Include="BetcityEvent.cs" />
     <Compile Include="Converters\EnvironmentConverter.cs" />
     <Compile Include="Converters\TitleConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
