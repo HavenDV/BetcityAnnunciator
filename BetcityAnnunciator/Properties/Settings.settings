@@ -6,7 +6,7 @@
       <Value Profile="(Default)">15</Value>
     </Setting>
     <Setting Name="RequestScore" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">5:0</Value>
     </Setting>
     <Setting Name="Filter" Type="System.String" Scope="User">
       <Value Profile="(Default)">Настольный теннис</Value>

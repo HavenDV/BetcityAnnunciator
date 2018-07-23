@@ -34,20 +34,39 @@ namespace BetcityAnnunciator
             {
                 return;
             }
-
+            
             await Task.Delay(5000);
 
             var html = await Browser.GetSourceAsync();
 
             Events = GetEvents(html);
 
+            var found = false;
             foreach (var @event in Events)
             {
-                @event.Color = @event.Championship.Contains(Settings.Default.Filter) ? Colors.GreenYellow : @event.Color;
+                if (!@event.Championship.Contains(Settings.Default.Filter))
+                {
+                    continue;
+                }
+
+                @event.Color =  Colors.GreenYellow;
+
+                if (!string.IsNullOrWhiteSpace(Settings.Default.RequestScore) &&
+                    @event.Score.Contains(Settings.Default.RequestScore))
+                {
+                    found = true;
+                    @event.Color = Colors.Red;
+                }
+            }
+
+            if (found)
+            {
+                Notify();
             }
 
             Dispatcher.Invoke(
                 () => EventsListBox.GetBindingExpression(ItemsControl.ItemsSourceProperty)?.UpdateTarget());
+
         }
 
         private static List<BetcityEvent> GetEvents(string html)
@@ -67,5 +86,11 @@ namespace BetcityAnnunciator
                 Title = i.Attributes["title"].Value
             })
             .ToList();
+
+        private static void Notify()
+        {
+            var player = new System.Media.SoundPlayer("beep.wav");
+            player.Play();
+        }
     }
 }
