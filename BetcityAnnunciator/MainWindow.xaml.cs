@@ -2,8 +2,11 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Media;
 using CefSharp;
 using HtmlAgilityPack;
+using Timer = System.Timers.Timer;
+using BetcityAnnunciator.Properties;
 
 namespace BetcityAnnunciator
 {
@@ -12,12 +15,17 @@ namespace BetcityAnnunciator
         #region Properties
         
         public List<BetcityEvent> Events { get; set; }
+        public Timer Timer { get; }
 
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
+
+            Timer = new Timer(Settings.Default.UpdateInterval * 1000);
+            Timer.Elapsed += (sender, args) => Browser.Reload();
+            Timer.Start();
         }
 
         private async void Browser_OnFrameLoadEnd(object sender, FrameLoadEndEventArgs e)
@@ -32,6 +40,11 @@ namespace BetcityAnnunciator
             var html = await Browser.GetSourceAsync();
 
             Events = GetEvents(html);
+
+            foreach (var @event in Events)
+            {
+                @event.Color = @event.Championship.Contains(Settings.Default.Filter) ? Colors.GreenYellow : @event.Color;
+            }
 
             Dispatcher.Invoke(
                 () => EventsListBox.GetBindingExpression(ItemsControl.ItemsSourceProperty)?.UpdateTarget());

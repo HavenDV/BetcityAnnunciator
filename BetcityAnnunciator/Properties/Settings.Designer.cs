@@ -8,20 +8,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BetcityAnnunciator.Properties
-{
-
-
+namespace BetcityAnnunciator.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
+        
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int UpdateInterval {
+            get {
+                return ((int)(this["UpdateInterval"]));
+            }
+            set {
+                this["UpdateInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RequestScore {
+            get {
+                return ((string)(this["RequestScore"]));
+            }
+            set {
+                this["RequestScore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Настольный теннис")]
+        public string Filter {
+            get {
+                return ((string)(this["Filter"]));
+            }
+            set {
+                this["Filter"] = value;
             }
         }
     }
