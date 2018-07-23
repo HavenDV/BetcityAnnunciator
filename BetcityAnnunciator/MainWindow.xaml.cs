@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Windows.Controls;
 using CefSharp;
 using HtmlAgilityPack;
 
@@ -10,7 +11,7 @@ namespace BetcityAnnunciator
     {
         #region Properties
         
-        private List<BetcityEvent> Events { get; set; }
+        public List<BetcityEvent> Events { get; set; }
 
         #endregion
 
@@ -31,6 +32,9 @@ namespace BetcityAnnunciator
             var html = await Browser.GetSourceAsync();
 
             Events = GetEvents(html);
+
+            Dispatcher.Invoke(
+                () => EventsListBox.GetBindingExpression(ItemsControl.ItemsSourceProperty)?.UpdateTarget());
         }
 
         private static List<BetcityEvent> GetEvents(string html)
