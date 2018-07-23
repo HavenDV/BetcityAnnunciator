@@ -37,13 +37,13 @@ namespace BetcityAnnunciator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5:0")]
-        public string RequestScore {
+        [global::System.Configuration.DefaultSettingValueAttribute("5:0;0:5")]
+        public string RequestMainScore {
             get {
-                return ((string)(this["RequestScore"]));
+                return ((string)(this["RequestMainScore"]));
             }
             set {
-                this["RequestScore"] = value;
+                this["RequestMainScore"] = value;
             }
         }
         
@@ -56,6 +56,18 @@ namespace BetcityAnnunciator.Properties {
             }
             set {
                 this["Filter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RequestAdditionalScore {
+            get {
+                return ((string)(this["RequestAdditionalScore"]));
+            }
+            set {
+                this["RequestAdditionalScore"] = value;
             }
         }
     }

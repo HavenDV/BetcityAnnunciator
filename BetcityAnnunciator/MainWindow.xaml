@@ -93,11 +93,13 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Update every(seconds):"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=UpdateInterval}"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Request score:"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequestScore}"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Filter:"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
-                    <ListBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EventsListBox" ItemsSource="{Binding Events}">
+                    <Label Grid.Row="1" Grid.Column="0" Content="Request main score:"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequestMainScore}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Request additional score:"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequestAdditionalScore}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Filter:"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
+                    <ListBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EventsListBox" ItemsSource="{Binding Events}" HorizontalContentAlignment="Stretch">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -105,19 +107,20 @@
                                         <SolidColorBrush Color="{Binding Color}" />
                                     </Grid.Background>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="33*"></ColumnDefinition>
-                                        <ColumnDefinition Width="33*"></ColumnDefinition>
-                                        <ColumnDefinition Width="33*"></ColumnDefinition>
+                                        <ColumnDefinition Width="25*"></ColumnDefinition>
+                                        <ColumnDefinition Width="25*"></ColumnDefinition>
+                                        <ColumnDefinition Width="25*"></ColumnDefinition>
+                                        <ColumnDefinition Width="25*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding Championship}"/>
                                     <TextBlock Grid.Column="1" Text="{Binding Title}"/>
-                                    <TextBlock Grid.Column="2" Text="{Binding Score}"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding MainScore}"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding AdditionalScore}"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Grid.Row="5" Grid.Column="0" Content="Save"/>
-                    <Button Grid.Row="5" Grid.Column="1" Content="Cancel"/>
+                    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" Click="SaveButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

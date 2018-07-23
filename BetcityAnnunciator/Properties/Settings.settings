@@ -5,11 +5,14 @@
     <Setting Name="UpdateInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="RequestScore" Type="System.String" Scope="User">
-      <Value Profile="(Default)">5:0</Value>
+    <Setting Name="RequestMainScore" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5:0;0:5</Value>
     </Setting>
     <Setting Name="Filter" Type="System.String" Scope="User">
       <Value Profile="(Default)">Настольный теннис</Value>
+    </Setting>
+    <Setting Name="RequestAdditionalScore" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

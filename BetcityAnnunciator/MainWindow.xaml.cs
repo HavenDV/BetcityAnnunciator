@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using CefSharp;
@@ -41,6 +42,7 @@ namespace BetcityAnnunciator
 
             Events = GetEvents(html);
 
+            var requiredMainScores = Settings.Default.RequestMainScore.Split(';').ToList();
             var found = false;
             foreach (var @event in Events)
             {
@@ -51,11 +53,18 @@ namespace BetcityAnnunciator
 
                 @event.Color =  Colors.GreenYellow;
 
-                if (!string.IsNullOrWhiteSpace(Settings.Default.RequestScore) &&
-                    @event.Score.Contains(Settings.Default.RequestScore))
+                if (requiredMainScores.Any())
                 {
-                    found = true;
-                    @event.Color = Colors.Red;
+                    foreach (var requiredScore in requiredMainScores)
+                    {
+                        if (!@event.MainScore.Contains(requiredScore))
+                        {
+                            continue;
+                        }
+
+                        found = true;
+                        @event.Color = Colors.Red;
+                    }
                 }
             }
 
@@ -82,7 +91,7 @@ namespace BetcityAnnunciator
             .Select(i => new BetcityEvent
             {
                 Championship = i.Attributes["championship"].Value,
-                Score = i.Attributes["score"].DeEntitizeValue,
+                RawScore = i.Attributes["score"].DeEntitizeValue,
                 Title = i.Attributes["title"].Value
             })
             .ToList();
@@ -91,6 +100,11 @@ namespace BetcityAnnunciator
         {
             var player = new System.Media.SoundPlayer("beep.wav");
             player.Play();
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Default.Save();
         }
     }
 }
