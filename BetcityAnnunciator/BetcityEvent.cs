@@ -27,6 +27,15 @@ namespace BetcityAnnunciator
 
         public string LastSetScore => SetScores.LastOrDefault() ?? string.Empty;
 
+        public string SetScoreString => 
+            SetScores.Count == 3
+                ? $"{FirstSetScore}, {SecondSetScore}, {ThirdSetScore}"
+                : SetScores.Count == 2
+                    ? $"       {FirstSetScore}, {SecondSetScore}"
+                    : SetScores.Count == 1
+                        ? $"              {FirstSetScore}"
+                        : "";
+
         public bool ContainsScore(List<string> scores, Color color)
         {
             var found = false;
@@ -48,6 +57,11 @@ namespace BetcityAnnunciator
             if (string.IsNullOrWhiteSpace(score))
             {
                 return false;
+            }
+
+            if (score.Contains('&'))
+            {
+                return score.Split('&').All(ContainsScore);
             }
 
             var setString = score.Split(',').FirstOrDefault() ?? string.Empty;

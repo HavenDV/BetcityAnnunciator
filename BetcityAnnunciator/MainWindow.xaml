@@ -124,18 +124,14 @@
                                     </Grid.Background>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50*"></ColumnDefinition>
-                                        <ColumnDefinition Width="50*"></ColumnDefinition>
                                         <ColumnDefinition Width="100"></ColumnDefinition>
-                                        <ColumnDefinition Width="50"></ColumnDefinition>
-                                        <ColumnDefinition Width="50"></ColumnDefinition>
-                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="50*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding Championship}"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding Title}"/>
-                                    <TextBlock Grid.Column="2" Text="{Binding MainScore}"/>
-                                    <TextBlock Grid.Column="3" Text="{Binding FirstSetScore}"/>
-                                    <TextBlock Grid.Column="4" Text="{Binding SecondSetScore}"/>
-                                    <TextBlock Grid.Column="5" Text="{Binding ThirdSetScore}"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding MainScore}"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding SetScoreString}"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding Title}"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
