@@ -27,7 +27,12 @@ namespace BetcityAnnunciator
 
             RestartTimer();
 
-            Closed += (sender, args) => Cef.Shutdown();
+            Closed += (sender, args) =>
+            {
+                Settings.Default.Save();
+
+                Cef.Shutdown();
+            };
         }
 
         private void RestartTimer()
