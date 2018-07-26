@@ -84,22 +84,38 @@
                         <RowDefinition Height="25"></RowDefinition>
                         <RowDefinition Height="25"></RowDefinition>
                         <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
+                        <RowDefinition Height="25"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="25"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50*"></ColumnDefinition>
                         <ColumnDefinition Width="50*"></ColumnDefinition>
+                        <ColumnDefinition Width="25"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Update every(seconds):"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=UpdateInterval}"/>
-                    <Label Grid.Row="1" Grid.Column="0" Content="Request main score:"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequestMainScore}"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Request additional score:"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequestAdditionalScore}"/>
-                    <Label Grid.Row="3" Grid.Column="0" Content="Filter:"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
-                    <ListBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EventsListBox" ItemsSource="{Binding Events}" HorizontalContentAlignment="Stretch">
+                    <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=UpdateInterval}"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Delay(seconds):"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Delay}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Requered Green score:" Background="#FF18FF01"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGreenScore}"/>
+                    <CheckBox Grid.Row="2" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGreen}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Requered Yellow score:" Background="Yellow"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredYellowScore}"/>
+                    <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledYellow}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Requered Gray score:" Background="Gray"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGrayScore}"/>
+                    <CheckBox Grid.Row="4" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGray}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Row="5" Grid.Column="0" Content="Filter:"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="Enable sorting:"/>
+                    <CheckBox Grid.Row="6" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledSorting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Row="7" Grid.Column="0" Content="Mute:"/>
+                    <CheckBox Grid.Row="7" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=Mute}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <ListBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3" x:Name="EventsListBox" ItemsSource="{Binding Events}" HorizontalContentAlignment="Stretch">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -107,20 +123,24 @@
                                         <SolidColorBrush Color="{Binding Color}" />
                                     </Grid.Background>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="25*"></ColumnDefinition>
-                                        <ColumnDefinition Width="25*"></ColumnDefinition>
-                                        <ColumnDefinition Width="25*"></ColumnDefinition>
-                                        <ColumnDefinition Width="25*"></ColumnDefinition>
+                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                        <ColumnDefinition Width="50*"></ColumnDefinition>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
+                                        <ColumnDefinition Width="50"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding Championship}"/>
                                     <TextBlock Grid.Column="1" Text="{Binding Title}"/>
                                     <TextBlock Grid.Column="2" Text="{Binding MainScore}"/>
-                                    <TextBlock Grid.Column="3" Text="{Binding AdditionalScore}"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding FirstSetScore}"/>
+                                    <TextBlock Grid.Column="4" Text="{Binding SecondSetScore}"/>
+                                    <TextBlock Grid.Column="5" Text="{Binding ThirdSetScore}"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Save" Click="SaveButton_Click"/>
+                    <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3" Content="Save" Click="SaveButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

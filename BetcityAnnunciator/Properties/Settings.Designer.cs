@@ -25,7 +25,7 @@ namespace BetcityAnnunciator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int UpdateInterval {
             get {
                 return ((int)(this["UpdateInterval"]));
@@ -38,18 +38,18 @@ namespace BetcityAnnunciator.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5:0;0:5")]
-        public string RequestMainScore {
+        public string RequeredGreenScore {
             get {
-                return ((string)(this["RequestMainScore"]));
+                return ((string)(this["RequeredGreenScore"]));
             }
             set {
-                this["RequestMainScore"] = value;
+                this["RequeredGreenScore"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Настольный теннис")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Теннис")]
         public string Filter {
             get {
                 return ((string)(this["Filter"]));
@@ -62,12 +62,96 @@ namespace BetcityAnnunciator.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string RequestAdditionalScore {
+        public string RequeredYellowScore {
             get {
-                return ((string)(this["RequestAdditionalScore"]));
+                return ((string)(this["RequeredYellowScore"]));
             }
             set {
-                this["RequestAdditionalScore"] = value;
+                this["RequeredYellowScore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RequeredGrayScore {
+            get {
+                return ((string)(this["RequeredGrayScore"]));
+            }
+            set {
+                this["RequeredGrayScore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnabledGreen {
+            get {
+                return ((bool)(this["EnabledGreen"]));
+            }
+            set {
+                this["EnabledGreen"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnabledYellow {
+            get {
+                return ((bool)(this["EnabledYellow"]));
+            }
+            set {
+                this["EnabledYellow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnabledGray {
+            get {
+                return ((bool)(this["EnabledGray"]));
+            }
+            set {
+                this["EnabledGray"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Mute {
+            get {
+                return ((bool)(this["Mute"]));
+            }
+            set {
+                this["Mute"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnabledSorting {
+            get {
+                return ((bool)(this["EnabledSorting"]));
+            }
+            set {
+                this["EnabledSorting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int Delay {
+            get {
+                return ((int)(this["Delay"]));
+            }
+            set {
+                this["Delay"] = value;
             }
         }
     }

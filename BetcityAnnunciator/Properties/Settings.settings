@@ -3,16 +3,37 @@
   <Profiles />
   <Settings>
     <Setting Name="UpdateInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">15</Value>
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="RequestMainScore" Type="System.String" Scope="User">
+    <Setting Name="RequeredGreenScore" Type="System.String" Scope="User">
       <Value Profile="(Default)">5:0;0:5</Value>
     </Setting>
     <Setting Name="Filter" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Настольный теннис</Value>
+      <Value Profile="(Default)">Теннис</Value>
     </Setting>
-    <Setting Name="RequestAdditionalScore" Type="System.String" Scope="User">
+    <Setting Name="RequeredYellowScore" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RequeredGrayScore" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EnabledGreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnabledYellow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnabledGray" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Mute" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnabledSorting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Delay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
     </Setting>
   </Settings>
 </SettingsFile>

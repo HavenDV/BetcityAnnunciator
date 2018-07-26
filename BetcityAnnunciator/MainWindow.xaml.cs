@@ -14,15 +14,26 @@ namespace BetcityAnnunciator
     public partial class MainWindow
     {
         #region Properties
-        
+
         public List<BetcityEvent> Events { get; set; }
-        public Timer Timer { get; }
+
+        private Timer Timer { get; set; }
 
         #endregion
 
         public MainWindow()
         {
             InitializeComponent();
+
+            RestartTimer();
+
+            Closed += (sender, args) => Cef.Shutdown();
+        }
+
+        private void RestartTimer()
+        {
+            Timer?.Dispose();
+            Timer = null;
 
             Timer = new Timer(Settings.Default.UpdateInterval * 1000);
             Timer.Elapsed += (sender, args) => Browser.Reload();
@@ -35,42 +46,39 @@ namespace BetcityAnnunciator
             {
                 return;
             }
-            
-            await Task.Delay(5000);
+
+            await Task.Delay(Settings.Default.Delay * 1000);
 
             var html = await Browser.GetSourceAsync();
 
             Events = GetEvents(html);
+            Events = Events.Where(i => i.Championship.Contains(Settings.Default.Filter)).ToList();
 
-            var requiredMainScores = Settings.Default.RequestMainScore.Split(';').ToList();
+            var requiredGreenScores = Settings.Default.EnabledGreen ? Settings.Default.RequeredGreenScore.Split(';').ToList() : new List<string>();
+            var requiredYellowScores = Settings.Default.EnabledYellow ? Settings.Default.RequeredYellowScore.Split(';').ToList() : new List<string>();
+            var requiredGrayScores = Settings.Default.EnabledGray ? Settings.Default.RequeredGrayScore.Split(';').ToList() : new List<string>();
+
             var found = false;
             foreach (var @event in Events)
             {
-                if (!@event.Championship.Contains(Settings.Default.Filter))
-                {
-                    continue;
-                }
-
-                @event.Color =  Colors.GreenYellow;
-
-                if (requiredMainScores.Any())
-                {
-                    foreach (var requiredScore in requiredMainScores)
-                    {
-                        if (!@event.MainScore.Contains(requiredScore))
-                        {
-                            continue;
-                        }
-
-                        found = true;
-                        @event.Color = Colors.Red;
-                    }
-                }
+                found |= @event.ContainsScore(requiredGrayScores, Colors.Gray);
+                found |= @event.ContainsScore(requiredYellowScores, Colors.Yellow);
+                found |= @event.ContainsScore(requiredGreenScores, Colors.GreenYellow);
             }
 
-            if (found)
+            if (!Settings.Default.Mute && found)
             {
                 Notify();
+            }
+
+            if (Settings.Default.EnabledSorting)
+            {
+                var sortedList = new List<BetcityEvent>();
+                sortedList.AddRange(Events.Where(i => i.Color == Colors.GreenYellow));
+                sortedList.AddRange(Events.Where(i => i.Color == Colors.Yellow));
+                sortedList.AddRange(Events.Where(i => i.Color == Colors.Gray));
+                sortedList.AddRange(Events.Where(i => i.Color == SystemColors.ControlColor));
+                Events = sortedList;
             }
 
             Dispatcher.Invoke(
@@ -86,15 +94,24 @@ namespace BetcityAnnunciator
             return GetEvents(document.DocumentNode);
         }
 
-        private static List<BetcityEvent> GetEvents(HtmlNode node) => node
-            .SelectNodes("//tooltip[@championship and @score and @title]")
-            .Select(i => new BetcityEvent
+        private static List<BetcityEvent> GetEvents(HtmlNode node)
+        {
+            var tooltips = node.SelectNodes("//tooltip[@championship and @score and @title]");
+            if (tooltips == null)
             {
-                Championship = i.Attributes["championship"].Value,
-                RawScore = i.Attributes["score"].DeEntitizeValue,
-                Title = i.Attributes["title"].Value
-            })
-            .ToList();
+                return new List<BetcityEvent>();
+            }
+
+            var events = tooltips.Select(i => new BetcityEvent
+                {
+                    Championship = i.Attributes["championship"]?.Value,
+                    RawScore = i.Attributes["score"]?.DeEntitizeValue,
+                    Title = i.Attributes["title"]?.Value
+                })
+                .ToList();
+
+            return events;
+        }
 
         private static void Notify()
         {
@@ -105,6 +122,8 @@ namespace BetcityAnnunciator
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             Settings.Default.Save();
+
+            RestartTimer();
         }
     }
 }
