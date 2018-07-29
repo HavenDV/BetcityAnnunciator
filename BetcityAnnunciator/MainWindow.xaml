@@ -100,17 +100,17 @@
                     <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=UpdateInterval}"/>
                     <Label Grid.Row="1" Grid.Column="0" Content="Delay(seconds):"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Delay}"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Requered Green score:" Background="#FF18FF01"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGreenScore}"/>
-                    <CheckBox Grid.Row="2" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGreen}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Row="3" Grid.Column="0" Content="Requered Yellow score:" Background="Yellow"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredYellowScore}"/>
-                    <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledYellow}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Row="4" Grid.Column="0" Content="Requered Gray score:" Background="Gray"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGrayScore}"/>
-                    <CheckBox Grid.Row="4" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGray}" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Grid.Row="5" Grid.Column="0" Content="Filter:"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Filter:"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Requered Green score:" Background="#FF18FF01"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGreenScore}"/>
+                    <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGreen}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Row="4" Grid.Column="0" Content="Requered Yellow score:" Background="Yellow"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredYellowScore}"/>
+                    <CheckBox Grid.Row="4" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledYellow}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Grid.Row="5" Grid.Column="0" Content="Requered Gray score:" Background="Gray"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGrayScore}"/>
+                    <CheckBox Grid.Row="5" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGray}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Grid.Row="6" Grid.Column="0" Content="Enable sorting:"/>
                     <CheckBox Grid.Row="6" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledSorting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Grid.Row="7" Grid.Column="0" Content="Mute:"/>
