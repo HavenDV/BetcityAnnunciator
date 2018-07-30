@@ -3,37 +3,55 @@
   <Profiles />
   <Settings>
     <Setting Name="UpdateInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10</Value>
+      <Value Profile="(Default)">6</Value>
     </Setting>
     <Setting Name="RequeredGreenScore" Type="System.String" Scope="User">
-      <Value Profile="(Default)">5:0;0:5</Value>
+      <Value Profile="(Default)">0:5;0:4;5:0;4:0;1:5;5:1</Value>
     </Setting>
     <Setting Name="Filter" Type="System.String" Scope="User">
       <Value Profile="(Default)">Теннис</Value>
     </Setting>
     <Setting Name="RequeredYellowScore" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0:3;3:0;1:4;4:1;2:5;5:2</Value>
     </Setting>
-    <Setting Name="RequeredGrayScore" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="RequeredOrangeScore" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0:2;2:0;1:3;3:1;2:4;4:2;3:5;5:3</Value>
     </Setting>
     <Setting Name="EnabledGreen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="EnabledYellow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnabledOrange" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="MuteAll" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="EnabledGray" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="Mute" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="EnabledSorting" Type="System.Boolean" Scope="User">
+    <Setting Name="SortingByColor" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Delay" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="EnabledBlue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RequiredBlueScore" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1,0:6&amp;2,0:1;1,0:6&amp;2,0:2;1,0:6&amp;2,0:3;1,0:6&amp;2,0:4;1,0:6&amp;2,0:5;1,6:0&amp;2,1:0;1,6:0&amp;2,2:0;1,6:0&amp;2,3:0;1,6:0&amp;2,4:0;1,6:0&amp;2,5:0;1,1:6&amp;2,0:1;1,1:6&amp;2,0:2;1,1:6&amp;2,0:3;1,1:6&amp;2,0:4;1,1:6&amp;2,0:5;1,6:1&amp;2,1:0;1,6:1&amp;2,2:0;1,6:1&amp;2,3:0;1,6:1&amp;2,4:0;1,6:1&amp;2,5:0;1,2:6&amp;2,0:1;1,2:6&amp;2,0:2;1,2:6&amp;2,0:3;1,2:6&amp;2,0:4;1,2:6&amp;2,0:5;1,6:2&amp;2,1:0;1,6:2&amp;2,2:0;1,6:2&amp;2,3:0;1,6:2&amp;2,4:0;1,6:2&amp;2,5:0</Value>
+    </Setting>
+    <Setting Name="MuteBlue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MuteGreen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MuteYellow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MuteOrange" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

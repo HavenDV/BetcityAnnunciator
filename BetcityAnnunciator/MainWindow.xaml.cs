@@ -59,29 +59,36 @@ namespace BetcityAnnunciator
             Events = GetEvents(html);
             Events = Events.Where(i => i.Championship.Contains(Settings.Default.Filter)).ToList();
 
+            var requiredBlueScores = Settings.Default.EnabledBlue ? Settings.Default.RequiredBlueScore.Split(';').ToList() : new List<string>();
             var requiredGreenScores = Settings.Default.EnabledGreen ? Settings.Default.RequeredGreenScore.Split(';').ToList() : new List<string>();
             var requiredYellowScores = Settings.Default.EnabledYellow ? Settings.Default.RequeredYellowScore.Split(';').ToList() : new List<string>();
-            var requiredGrayScores = Settings.Default.EnabledGray ? Settings.Default.RequeredGrayScore.Split(';').ToList() : new List<string>();
+            var requiredOrangeScores = Settings.Default.EnabledOrange ? Settings.Default.RequeredOrangeScore.Split(';').ToList() : new List<string>();
 
-            var found = false;
+            var foundBlue = false;
+            var foundGreen = false;
+            var foundYellow = false;
+            var foundOrange = false;
             foreach (var @event in Events)
             {
-                found |= @event.ContainsScore(requiredGrayScores, Colors.Gray);
-                found |= @event.ContainsScore(requiredYellowScores, Colors.Yellow);
-                found |= @event.ContainsScore(requiredGreenScores, Colors.GreenYellow);
+                foundOrange |= !Settings.Default.MuteOrange & @event.ContainsScore(requiredOrangeScores, Colors.Orange);
+                foundYellow |= !Settings.Default.MuteYellow & @event.ContainsScore(requiredYellowScores, Colors.Yellow);
+                foundGreen |= !Settings.Default.MuteGreen & @event.ContainsScore(requiredGreenScores, Colors.GreenYellow);
+                foundBlue |= !Settings.Default.MuteBlue & @event.ContainsScore(requiredBlueScores, Colors.Aqua);
             }
 
-            if (!Settings.Default.Mute && found)
+            var found = foundBlue || foundGreen || foundYellow || foundOrange;
+            if (!Settings.Default.MuteAll && found)
             {
                 Notify();
             }
 
-            if (Settings.Default.EnabledSorting)
+            if (Settings.Default.SortingByColor)
             {
                 var sortedList = new List<BetcityEvent>();
+                sortedList.AddRange(Events.Where(i => i.Color == Colors.Aqua));
                 sortedList.AddRange(Events.Where(i => i.Color == Colors.GreenYellow));
                 sortedList.AddRange(Events.Where(i => i.Color == Colors.Yellow));
-                sortedList.AddRange(Events.Where(i => i.Color == Colors.Gray));
+                sortedList.AddRange(Events.Where(i => i.Color == Colors.Orange));
                 sortedList.AddRange(Events.Where(i => i.Color == SystemColors.ControlColor));
                 Events = sortedList;
             }
