@@ -86,8 +86,10 @@
     <Compile Include="Behaviours\HoverLinkBehaviour.cs" />
     <Compile Include="Behaviours\TextBoxBindingUpdateOnEnterBehaviour.cs" />
     <Compile Include="BetcityEvent.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Converters\EnvironmentConverter.cs" />
     <Compile Include="Converters\TitleConverter.cs" />
+    <Compile Include="Extensions\TextSerializationExtensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

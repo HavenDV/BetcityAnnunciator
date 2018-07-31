@@ -4,7 +4,6 @@
         xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         xmlns:behaviours="clr-namespace:BetcityAnnunciator.Behaviours"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:properties="clr-namespace:BetcityAnnunciator.Properties"
         Title="{Binding Path=Title, ElementName=Browser, Converter={StaticResource TitleConverter}}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         WindowState="Maximized">
@@ -98,11 +97,11 @@
                         <ColumnDefinition Width="25"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Update every(seconds):"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=UpdateInterval}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Configuration.UpdateInterval}"/>
                     <Label Grid.Row="1" Grid.Column="0" Content="Delay(seconds):"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Delay}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Configuration.Delay}"/>
                     <Label Grid.Row="2" Grid.Column="0" Content="Filter:"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Source={x:Static properties:Settings.Default},Path=Filter}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Configuration.Filter}"/>
                     <Grid Grid.Row="3" Grid.Column="0" Background="Aqua">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"></ColumnDefinition>
@@ -111,10 +110,10 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Requered Blue score:"/>
                         <Label Grid.Column="1" Content="Mute:"/>
-                        <CheckBox Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=MuteBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding Configuration.MuteBlue}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequiredBlueScore}"/>
-                    <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledBlue}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Configuration.RequiredBlueScore}"/>
+                    <CheckBox Grid.Row="3" Grid.Column="2" IsChecked="{Binding Configuration.EnabledBlue}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid Grid.Row="4" Grid.Column="0" Background="GreenYellow">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"></ColumnDefinition>
@@ -123,10 +122,10 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Requered Green score:"/>
                         <Label Grid.Column="1" Content="Mute:"/>
-                        <CheckBox Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=MuteGreen}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding Configuration.MuteGreen}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredGreenScore}"/>
-                    <CheckBox Grid.Row="4" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledGreen}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Configuration.RequiredGreenScore}"/>
+                    <CheckBox Grid.Row="4" Grid.Column="2" IsChecked="{Binding Configuration.EnabledGreen}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid Grid.Row="5" Grid.Column="0" Background="Yellow">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"></ColumnDefinition>
@@ -135,10 +134,10 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Requered Yellow score:"/>
                         <Label Grid.Column="1" Content="Mute:"/>
-                        <CheckBox Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=MuteYellow}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding Configuration.MuteYellow}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
-                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredYellowScore}"/>
-                    <CheckBox Grid.Row="5" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledYellow}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Configuration.RequiredYellowScore}"/>
+                    <CheckBox Grid.Row="5" Grid.Column="2" IsChecked="{Binding Configuration.EnabledYellow}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Grid Grid.Row="6" Grid.Column="0" Background="Orange">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100*"></ColumnDefinition>
@@ -147,14 +146,14 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Requered Orange score:"/>
                         <Label Grid.Column="1" Content="Mute:"/>
-                        <CheckBox Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=MuteOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <CheckBox Grid.Column="2" IsChecked="{Binding Configuration.MuteOrange}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Grid>
-                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Source={x:Static properties:Settings.Default},Path=RequeredOrangeScore}"/>
-                    <CheckBox Grid.Row="6" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=EnabledOrange}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Configuration.RequiredOrangeScore}"/>
+                    <CheckBox Grid.Row="6" Grid.Column="2" IsChecked="{Binding Configuration.EnabledOrange}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Grid.Row="7" Grid.Column="0" Content="Sorting By Color:"/>
-                    <CheckBox Grid.Row="7" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=SortingByColor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="7" Grid.Column="2" IsChecked="{Binding Configuration.SortingByColor}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Grid.Row="8" Grid.Column="0" Content="Mute All:"/>
-                    <CheckBox Grid.Row="8" Grid.Column="2" IsChecked="{Binding Source={x:Static properties:Settings.Default},Path=MuteAll}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <CheckBox Grid.Row="8" Grid.Column="2" IsChecked="{Binding Configuration.MuteAll}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Button Grid.Row="9" Grid.Column="0" Content="Save" Grid.ColumnSpan="3" Click="SaveButton_Click"/>
                     <ListBox Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="3" x:Name="EventsListBox" ItemsSource="{Binding Events}" HorizontalContentAlignment="Stretch">
                         <ListBox.ItemTemplate>

@@ -8,7 +8,6 @@ using System.Windows.Media;
 using CefSharp;
 using HtmlAgilityPack;
 using Timer = System.Timers.Timer;
-using BetcityAnnunciator.Properties;
 
 namespace BetcityAnnunciator
 {
@@ -17,6 +16,7 @@ namespace BetcityAnnunciator
         #region Properties
 
         public List<BetcityEvent> Events { get; set; }
+        public Configuration Configuration { get; } = Configuration.FromFile("settings.ini");
 
         private Timer Timer { get; set; }
 
@@ -30,7 +30,7 @@ namespace BetcityAnnunciator
 
             Closed += (sender, args) =>
             {
-                Settings.Default.Save();
+                Configuration.Save();
 
                 Cef.Shutdown();
             };
@@ -41,7 +41,7 @@ namespace BetcityAnnunciator
             Timer?.Dispose();
             Timer = null;
 
-            Timer = new Timer(Settings.Default.UpdateInterval * 1000);
+            Timer = new Timer(Configuration.UpdateInterval * 1000);
             Timer.Elapsed += (sender, args) => Browser.Reload();
             Timer.Start();
         }
@@ -53,17 +53,17 @@ namespace BetcityAnnunciator
                 return;
             }
 
-            await Task.Delay(Settings.Default.Delay * 1000);
+            await Task.Delay(Configuration.Delay * 1000);
 
             var html = await Browser.GetSourceAsync();
 
             Events = GetEvents(html);
-            Events = Events.Where(i => i.Championship.Contains(Settings.Default.Filter)).ToList();
+            Events = Events.Where(i => i.Championship.Contains(Configuration.Filter)).ToList();
 
-            var requiredBlueScores = Settings.Default.EnabledBlue ? Settings.Default.RequiredBlueScore.Split(';').ToList() : new List<string>();
-            var requiredGreenScores = Settings.Default.EnabledGreen ? Settings.Default.RequeredGreenScore.Split(';').ToList() : new List<string>();
-            var requiredYellowScores = Settings.Default.EnabledYellow ? Settings.Default.RequeredYellowScore.Split(';').ToList() : new List<string>();
-            var requiredOrangeScores = Settings.Default.EnabledOrange ? Settings.Default.RequeredOrangeScore.Split(';').ToList() : new List<string>();
+            var requiredBlueScores = GetScores(Configuration.EnabledBlue, Configuration.RequiredBlueScore);
+            var requiredGreenScores = GetScores(Configuration.EnabledGreen, Configuration.RequiredGreenScore);
+            var requiredYellowScores = GetScores(Configuration.EnabledYellow, Configuration.RequiredYellowScore);
+            var requiredOrangeScores = GetScores(Configuration.EnabledOrange, Configuration.RequiredOrangeScore);
 
             var foundBlue = false;
             var foundGreen = false;
@@ -71,19 +71,19 @@ namespace BetcityAnnunciator
             var foundOrange = false;
             foreach (var @event in Events)
             {
-                foundOrange |= !Settings.Default.MuteOrange & @event.ContainsScore(requiredOrangeScores, Colors.Orange);
-                foundYellow |= !Settings.Default.MuteYellow & @event.ContainsScore(requiredYellowScores, Colors.Yellow);
-                foundGreen |= !Settings.Default.MuteGreen & @event.ContainsScore(requiredGreenScores, Colors.GreenYellow);
-                foundBlue |= !Settings.Default.MuteBlue & @event.ContainsScore(requiredBlueScores, Colors.Aqua);
+                foundOrange |= !Configuration.MuteOrange & @event.ContainsScore(requiredOrangeScores, Colors.Orange);
+                foundYellow |= !Configuration.MuteYellow & @event.ContainsScore(requiredYellowScores, Colors.Yellow);
+                foundGreen |= !Configuration.MuteGreen & @event.ContainsScore(requiredGreenScores, Colors.GreenYellow);
+                foundBlue |= !Configuration.MuteBlue & @event.ContainsScore(requiredBlueScores, Colors.Aqua);
             }
 
             var found = foundBlue || foundGreen || foundYellow || foundOrange;
-            if (!Settings.Default.MuteAll && found)
+            if (!Configuration.MuteAll && found)
             {
                 Notify();
             }
 
-            if (Settings.Default.SortingByColor)
+            if (Configuration.SortingByColor)
             {
                 var sortedList = new List<BetcityEvent>();
                 sortedList.AddRange(Events.Where(i => i.Color == Colors.Aqua));
@@ -105,6 +105,11 @@ namespace BetcityAnnunciator
             document.LoadHtml(html);
 
             return GetEvents(document.DocumentNode);
+        }
+
+        private static List<string> GetScores(bool isEnabled, string text)
+        {
+            return isEnabled ? text?.Split(';').ToList() ?? new List<string>() : new List<string>();
         }
 
         private static List<BetcityEvent> GetEvents(HtmlNode node)
@@ -150,7 +155,7 @@ namespace BetcityAnnunciator
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            Settings.Default.Save();
+            Configuration.Save();
 
             RestartTimer();
         }
