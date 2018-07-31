@@ -10,16 +10,10 @@ namespace BetcityAnnunciator
     {
         public string Championship { get; set; }
         public string Title { get; set; }
-        public string RawScore { get; set; } //["69:72"," (20:17, 30:23, 19:23, 0:9)"]
-        public string MainScore => RawScore.Split(',').FirstOrDefault()?.Trim('\"', '[') ?? string.Empty;
-        public string AdditionalScore => RawScore.Replace(MainScore, string.Empty);
+        public string MainScore { get; set; }
+        public List<string> SetScores { get; set; }
 
-        //["1:1"," (6:4, 4:6, 0:1)"]
-        public List<string> SetScores => AdditionalScore
-            .Trim(' ', '(', ')', '\"', ']', ',', '[')
-            .Split(',')
-            .Select(i => i.Trim())
-            .ToList();
+        public string AdditionalInfo { get; set; }
 
         public string FirstSetScore => SetScores.ElementAtOrDefault(0) ?? string.Empty;
         public string SecondSetScore => SetScores.ElementAtOrDefault(1) ?? string.Empty;

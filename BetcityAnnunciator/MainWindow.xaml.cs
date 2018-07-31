@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows;
@@ -108,21 +109,37 @@ namespace BetcityAnnunciator
 
         private static List<BetcityEvent> GetEvents(HtmlNode node)
         {
-            var tooltips = node.SelectNodes("//tooltip[@championship and @score and @title]");
-            if (tooltips == null)
+            return node
+                       .SelectNodes("//tooltip[@championship and @score and @title]")
+                       ?.Select(CreateEventFromTooltip)
+                       .ToList() ?? new List<BetcityEvent>();
+        }
+
+        private static BetcityEvent CreateEventFromTooltip(HtmlNode node)
+        {
+            //["1:1"," (6:4, 4:6, 0:1)"]
+            //["69:72"," (20:17, 30:23, 19:23, 0:9)"]
+            // ? ["69:72"," (20:17, 30:23, 19:23, 0:9) (матч приостановлен)"]
+            var rawScore = node.Attributes["score"]?.DeEntitizeValue ?? string.Empty;
+            rawScore = rawScore.Trim('[', ']');
+
+            var splitByQuotes = rawScore.Split(new []{ '\"' }, StringSplitOptions.RemoveEmptyEntries);
+            var mainScore = splitByQuotes.FirstOrDefault() ?? string.Empty;
+            var additionalString = splitByQuotes.LastOrDefault()?.Trim() ?? string.Empty;
+
+            var splitByBrackets = additionalString.Split(new[] { ')', '(' }, StringSplitOptions.RemoveEmptyEntries);
+            var additionalScore = splitByBrackets.FirstOrDefault() ?? string.Empty;
+            var additionalInfo = splitByBrackets.ElementAtOrDefault(2) ?? string.Empty;
+            var setScores = additionalScore.Split(',').Select(i => i.Trim()).ToList();
+
+            return new BetcityEvent
             {
-                return new List<BetcityEvent>();
-            }
-
-            var events = tooltips.Select(i => new BetcityEvent
-                {
-                    Championship = i.Attributes["championship"]?.Value,
-                    RawScore = i.Attributes["score"]?.DeEntitizeValue,
-                    Title = i.Attributes["title"]?.Value
-                })
-                .ToList();
-
-            return events;
+                Championship = node.Attributes["championship"]?.Value,
+                Title = node.Attributes["title"]?.Value,
+                MainScore = mainScore,
+                SetScores = setScores,
+                AdditionalInfo = additionalInfo
+            };
         }
 
         private static void Notify()
